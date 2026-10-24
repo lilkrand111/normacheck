@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NormaCheck — проверка оформления курсовой по СТП 01–2017. Загрузите DOCX, разберите замечания и скачайте исправленную копию.">
+  <meta name="theme-color" content="#f8f9f6">
+  <title>NormaCheck — проверка оформления</title>
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/styles.css">
+  <script type="module" src="/assets/app.js"></script>
+</head>
+<body>
+  <header class="header shell">
+    <a class="brand" href="/" aria-label="NormaCheck — главная"><img class="brand-mark" src="/assets/favicon.svg" alt="" width="36" height="36"><span class="brand-name">Norma<span class="brand-accent">Check</span></span></a>
+    <span class="header-note">Проверка оформления <span class="standard">СТП 01–2017 БГУИР</span></span>
+  </header>
+  <main class="shell">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="eyebrow"><span class="tiny-dot"></span> Меньше рутины. Больше смысла.</div>
+      <h1 id="page-title">Курсовая в порядке<span>.</span></h1>
+      <p>Проверьте оформление, исправьте доступные ошибки<br class="desktop-break"> и уделите время тому, что действительно важно.</p>
+    </section>
+
+    <div id="global-message" class="notice error-notice" role="alert" hidden></div>
+    <button id="session-retry" class="button secondary" type="button" hidden>Повторить подключение</button>
+
+    <section id="upload-zone" class="upload-zone" aria-label="Загрузить документ">
+      <div class="upload-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6h14l8 8v28H14z"/><path d="M28 6v10h8M24 33V22m-5 5 5-5 5 5"/></svg></div>
+      <div class="upload-copy"><h2 id="upload-title">Начнём с вашего документа</h2><p id="upload-subtitle">Перетащите файл сюда или выберите его на устройстве</p></div>
+      <label class="button primary file-button" id="file-label"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3m-4 4 4-4 4 4M3 12v5h14v-5"/></svg><span id="upload-label">Выбрать документ</span><input id="file-input" type="file" accept=".docx" aria-label="Выбрать документ DOCX" disabled></label>
+      <span id="upload-limit" class="upload-limit">DOCX · Подключаемся…</span>
+    </section>
+    <p class="storage-note">Исходный файл остаётся неизменным. Документы сохраняются на сервере для аналитики.</p>
+
+    <section id="workspace" class="workspace" aria-label="Результат проверки" hidden>
+      <div id="document-switcher" class="document-switcher" hidden><label for="document-select">Документы этой вкладки</label><select id="document-select"></select></div>
+      <div class="document-bar">
+        <span class="file-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 2h8l5 5v15H6zM14 2v6h5M9 12h7M9 16h7"/></svg></span>
+        <div class="document-info"><h2 id="filename"></h2><p id="document-state"></p></div>
+        <div class="document-actions"><button id="refresh" class="button secondary" type="button" hidden>Обновить статус</button><button id="fix" class="button primary" type="button" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 16 9-9 3 3-9 9zM5 2v6M2 5h6m8-4v4m-2-2h4"/></svg><span>Автоисправление</span></button><button id="download" class="button primary" type="button" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v11m-4-4 4 4 4-4M3 13v4h14v-4"/></svg><span>Скачать документ</span></button></div>
+      </div>
+      <div id="document-message" class="notice" role="status" hidden></div>
+      <p id="action-note" class="action-note"></p>
+      <div id="report" hidden>
+        <div class="report-heading"><div><span class="eyebrow">Результат проверки</span><h2>Разберём замечания</h2></div><span id="marked-count" class="marked-count"></span></div>
+        <div class="status-filters" role="group" aria-label="Фильтр по статусу">
+          <button type="button" class="status-filter active" data-status="all" aria-pressed="true">Все замечания <span id="count-all">0</span></button>
+          <button type="button" class="status-filter" data-status="error" aria-pressed="false"><i class="status-dot error"></i>Ошибки <span id="count-error">0</span></button>
+          <button type="button" class="status-filter" data-status="review" aria-pressed="false"><i class="status-dot review"></i>Ручная проверка <span id="count-review">0</span></button>
+          <button type="button" class="status-filter" data-status="recommendation" aria-pressed="false"><i class="status-dot recommendation"></i>Рекомендации <span id="count-recommendation">0</span></button>
+        </div>
+        <div class="toolbar">
+          <div class="search-wrap"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="search" type="search" placeholder="Найти замечание или фрагмент…" aria-label="Поиск среди замечаний" autocomplete="off"></div>
+          <select id="category" aria-label="Категория замечаний"><option value="all">Все категории</option></select>
+          <label class="hide-done"><input type="checkbox" id="hide-done"> Скрыть отмеченные</label>
+        </div>
+        <div class="list-caption"><span id="visible-count" role="status"></span><span>Галочка — ваша отметка, без перепроверки</span></div>
+        <div id="findings" class="findings"></div>
+        <div id="empty" class="empty-state" hidden><span class="empty-symbol" aria-hidden="true">✓</span><h3 id="empty-title"></h3><p id="empty-text"></p><button id="reset-filters" class="button secondary" type="button" hidden>Сбросить фильтры</button></div>
+      </div>
+      <details id="coverage" class="coverage" hidden><summary>Что учитывает проверка <span id="warning-count"></span></summary><div class="coverage-body"><p>Проверяем доступные по структуре DOCX требования СТП 01–2017 с уточнениями заказчика. Смысл текста, изображения и фактическая вёрстка страниц не анализируются.</p><div id="warnings"></div><div id="limitations"></div></div></details>
+    </section>
+    <noscript><p class="notice error-notice">Для загрузки и проверки документа включите JavaScript в браузере.</p></noscript>
+  </main>
+  <footer class="footer shell"><span>Маленький помощник для большой работы.</span><span>Оформление по СТП 01–2017</span></footer>
+</body>
+</html>

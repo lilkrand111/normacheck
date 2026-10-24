@@ -1,11 +1,13 @@
 """Application factory. One API process supervises multiple document processes."""
 from contextlib import asynccontextmanager
 import logging
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from starlette.exceptions import HTTPException
 from starlette.middleware.trustedhost import TrustedHostMiddleware
-from starlette.responses import JSONResponse
+from starlette.responses import FileResponse, JSONResponse
+from starlette.staticfiles import StaticFiles
 
 from .config import Settings
 from .middleware import BodyLimitMiddleware
@@ -39,6 +41,14 @@ def create_app(settings=None):
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=list(settings.allowed_hosts))
     application.add_middleware(BodyLimitMiddleware, max_bytes=settings.max_upload_bytes + 1024 * 1024)
     application.include_router(router)
+
+    # Only the dedicated UI directory is public; document storage stays private.
+    frontend = Path(__file__).resolve().parent.parent / "frontend"
+    application.mount("/assets", StaticFiles(directory=frontend / "assets"), name="assets")
+
+    @application.get("/", include_in_schema=False)
+    async def index():
+        return FileResponse(frontend / "index.html", headers={"Cache-Control": "no-cache"})
 
     @application.exception_handler(ProcessingError)
     async def processing_error(request: Request, exc: ProcessingError):

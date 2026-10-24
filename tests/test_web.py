@@ -337,8 +337,17 @@ def test_path_traversal_and_private_storage_are_unavailable(client):
     assert client.get("/", headers={"Host": "attacker.example"}).status_code == 400
 
 
-def test_backend_has_openapi_and_no_frontend(client):
-    assert client.get("/").status_code == 404
+def test_frontend_is_served_with_csp_and_api_stays_available(client):
+    page = client.get("/")
+    assert page.status_code == 200
+    assert 'lang="ru"' in page.text
+    assert 'src="/assets/app.js"' in page.text
+    assert "script-src 'self'" in page.headers["content-security-policy"]
+    assert page.headers["cache-control"] == "no-cache"
+    for asset in ("app.js", "report.mjs", "styles.css", "favicon.svg"):
+        assert client.get(f"/assets/{asset}").status_code == 200
+    for path in ("/assets/../app/security.py", "/assets/%2e%2e/storage/.session-secret", "/assets/index.html", "/storage/documents"):
+        assert client.get(path).status_code == 404
     assert client.get("/static/app.js").status_code == 404
     schema = client.get("/openapi.json").json()
     assert all("delete" not in methods for methods in schema["paths"].values())
