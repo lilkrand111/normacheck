@@ -53,6 +53,19 @@ export function parseMarks(raw, count) {
   } catch { return new Set(); }
 }
 
+export function retryDelay(error) {
+  if (![429, 503].includes(error.status)) return 0;
+  const value = Number(error.retryAfter);
+  return Number.isFinite(value) && value > 0 ? Math.ceil(value) : 5;
+}
+
+export function operationErrorMessage(error) {
+  if (error.status === 429) return "Слишком много запросов с вашего адреса. Дождитесь окончания паузы и повторите действие вручную.";
+  if (error.status === 408) return "Не удалось загрузить файл за отведённое время. Проверьте соединение и повторите загрузку вручную.";
+  if (error.status === 504) return "Проверка или исправление заняли слишком много времени. Если документ уже известен, обновите его статус.";
+  return error.message;
+}
+
 export async function readResponse(response) {
   const text = await response.text();
   let data;
@@ -60,6 +73,7 @@ export async function readResponse(response) {
   if (!response.ok) {
     const error = new Error(data?.error?.message || (typeof data?.detail === "string" && data.detail) || `Сервер вернул ошибку ${response.status}. Попробуйте позже.`);
     error.status = response.status;
+    error.code = data?.error?.code || "http_error";
     error.retryAfter = Number(response.headers.get("Retry-After")) || 5;
     throw error;
   }

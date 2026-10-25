@@ -11,6 +11,7 @@ from starlette.staticfiles import StaticFiles
 
 from .config import Settings
 from .middleware import BodyLimitMiddleware
+from .rate_limit import RateLimiter
 from .routes import router
 from .runner import ProcessingError
 from .security import Sessions
@@ -30,6 +31,7 @@ def create_app(settings=None):
             application.state.settings = settings
             application.state.service = service
             application.state.sessions = Sessions(settings.secret or service.storage.local_secret())
+            application.state.rate_limiter = RateLimiter(settings)
             try:
                 yield
             finally:
@@ -39,7 +41,8 @@ def create_app(settings=None):
                           lifespan=lifespan, docs_url=None, redoc_url=None,
                           description="Формальная проверка и исправление DOCX без базы данных. Разные документы обрабатываются параллельно.")
     application.add_middleware(TrustedHostMiddleware, allowed_hosts=list(settings.allowed_hosts))
-    application.add_middleware(BodyLimitMiddleware, max_bytes=settings.max_upload_bytes + 1024 * 1024)
+    application.add_middleware(BodyLimitMiddleware, max_bytes=settings.max_upload_bytes + 1024 * 1024,
+                              upload_timeout=settings.upload_timeout, idle_timeout=settings.upload_idle_timeout)
     application.include_router(router)
 
     # Only the dedicated UI directory is public; document storage stays private.
@@ -52,7 +55,8 @@ def create_app(settings=None):
 
     @application.exception_handler(ProcessingError)
     async def processing_error(request: Request, exc: ProcessingError):
-        headers = {"Retry-After": "5"} if exc.status_code == 503 else None
+        retry_after = exc.retry_after if exc.retry_after is not None else (5 if exc.status_code == 503 else None)
+        headers = {"Retry-After": str(retry_after)} if retry_after is not None else None
         return JSONResponse({"error": {"code": exc.code, "message": exc.message}}, status_code=exc.status_code, headers=headers)
 
     @application.exception_handler(HTTPException)

@@ -1,17 +1,20 @@
 """Bound request bodies before multipart parsing starts consuming disk."""
 import asyncio
+from time import monotonic
 
 from starlette.exceptions import HTTPException
 from starlette.responses import JSONResponse
 
 
 class BodyLimitMiddleware:
-    def __init__(self, app, max_bytes):
+    def __init__(self, app, max_bytes, upload_timeout=120, idle_timeout=30, *, clock=None):
         self.app, self.max_bytes = app, max_bytes
+        self.upload_timeout, self.idle_timeout, self.clock = upload_timeout, idle_timeout, clock or monotonic
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":
             return await self.app(scope, receive, send)
+        deadline = self.clock() + self.upload_timeout
         headers = dict(scope.get("headers", []))
         try:
             too_large = int(headers.get(b"content-length", b"0")) > self.max_bytes
@@ -25,10 +28,15 @@ class BodyLimitMiddleware:
 
         async def limited_receive():
             nonlocal total
+            remaining = deadline - self.clock()
+            if remaining <= 0:
+                raise HTTPException(408, "Превышено общее время загрузки файла. Повторите загрузку при стабильном соединении.")
             try:
-                message = await asyncio.wait_for(receive(), 30)
+                message = await asyncio.wait_for(receive(), min(self.idle_timeout, remaining))
             except asyncio.TimeoutError:
                 raise HTTPException(408, "Превышено время загрузки файла.") from None
+            if self.clock() >= deadline:
+                raise HTTPException(408, "Превышено общее время загрузки файла. Повторите загрузку при стабильном соединении.")
             if message["type"] == "http.request":
                 total += len(message.get("body", b""))
                 if total > self.max_bytes:

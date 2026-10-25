@@ -1,10 +1,13 @@
-import { STATUSES, RULES, PROPERTIES, filteredFindings, markStorageKey, parseMarks, readResponse } from "./report.mjs";
+import { STATUSES, RULES, PROPERTIES, filteredFindings, markStorageKey, parseMarks, readResponse, retryDelay, operationErrorMessage } from "./report.mjs";
 
 const $ = id => document.getElementById(id);
 const documents = new Map();
 let selected = null;
 let session = null;
 let localId = 0;
+let mutationRetryUntil = 0;
+let retryTimer;
+let pauseNotice = false;
 const filters = { status: "all", category: "all", query: "", hideDone: false };
 const isBusy = entry => entry?.operation || ["checking", "fixing"].includes(entry?.data?.state);
 const current = () => documents.get(selected);
@@ -18,6 +21,7 @@ function element(tag, className, text) {
 }
 
 function message(id, text, error = false) {
+  if (id === "global-message") pauseNotice = false;
   $(id).textContent = text || "";
   $(id).hidden = !text;
   $(id).classList.toggle("error-notice", error);
@@ -98,7 +102,7 @@ function newEntry(key, filename) {
 }
 
 async function handleError(entry, error, upload = false) {
-  entry.error = error.message;
+  entry.error = operationErrorMessage(error);
   if (error instanceof TypeError) {
     entry.error = upload
       ? "Соединение прервалось. Документ мог сохраниться на сервере. Повторная загрузка создаст ещё одну копию; автоматического повтора нет."
@@ -115,16 +119,33 @@ async function handleError(entry, error, upload = false) {
       ? "Сессия обновлена. Повторите действие вручную. Если прежняя cookie потеряна, доступ к старому документу не восстановится."
       : "Не удалось обновить сессию. Повторите подключение к серверу.";
   }
-  if (error.status === 503) {
-    const seconds = Math.min(300, Math.max(1, error.retryAfter));
+  if ([429, 503].includes(error.status)) {
+    const seconds = retryDelay(error);
     entry.error += ` Повторите действие через ${seconds} сек.`;
     entry.retryUntil = Date.now() + seconds * 1000;
-    setTimeout(render, seconds * 1000 + 20);
+    mutationRetryUntil = Math.max(mutationRetryUntil, entry.retryUntil);
+    scheduleRetryRender();
   }
+}
+
+function scheduleRetryRender() {
+  clearTimeout(retryTimer);
+  const remaining = mutationRetryUntil - Date.now();
+  if (remaining <= 0) return render();
+  retryTimer = setTimeout(() => { render(); scheduleRetryRender(); }, Math.min(remaining + 20, 2147483647));
+}
+
+function mutationPaused() {
+  if (mutationRetryUntil <= Date.now()) return false;
+  const seconds = Math.ceil((mutationRetryUntil - Date.now()) / 1000);
+  message("global-message", `Новые операции временно приостановлены. Повторите действие через ${seconds} сек.`, true);
+  pauseNotice = true;
+  return true;
 }
 
 async function upload(file) {
   if (!session || !file) return;
+  if (mutationPaused()) return;
   if (!file.name.toLowerCase().endsWith(".docx")) return message("global-message", "Выберите документ в формате DOCX.", true);
   if (!file.size) return message("global-message", "Файл пуст. Выберите другой документ.", true);
   if (file.size > session.max_upload_bytes) return message("global-message", `Файл слишком большой. ${$("upload-limit").textContent}.`, true);
@@ -162,6 +183,7 @@ async function refresh(entry, poll = false) {
 async function fix() {
   const entry = current();
   if (!entry?.data || isBusy(entry) || entry.refreshing) return;
+  if (mutationPaused() || entry.retryUntil > Date.now()) return;
   entry.operation = "fixing";
   entry.error = "";
   render();
@@ -216,10 +238,14 @@ function render() {
   const entry = current();
   document.body.classList.toggle("has-document", Boolean(entry));
   $("workspace").hidden = !entry;
-  $("file-input").disabled = !session;
+  const paused = mutationRetryUntil > Date.now();
+  if (!paused && pauseNotice) message("global-message", "");
+  $("file-input").disabled = !session || paused;
   $("upload-label").textContent = entry ? "Другой документ" : "Выбрать документ";
   $("upload-title").textContent = entry ? "Проверить другой документ" : "Начнём с вашего документа";
-  $("upload-subtitle").textContent = entry ? "Можно загрузить новую версию после ручных правок" : "Перетащите файл сюда или выберите его на устройстве";
+  $("upload-subtitle").textContent = paused
+    ? "Приём новых операций временно приостановлен. Дождитесь окончания паузы."
+    : entry ? "Можно загрузить новую версию после ручных правок" : "Перетащите файл сюда или выберите его на устройстве";
   if (!entry) return;
   $("document-switcher").hidden = documents.size < 2;
   $("document-select").replaceChildren(...[...documents.values()].map(item => {
@@ -237,7 +263,7 @@ function render() {
     ? ((entry.operation === "fixing" || data?.state === "fixing") ? "Исправляем и повторно проверяем…" : "Проверяем документ…")
     : entry.refreshing ? "Обновляем статус…" : corrected ? "Исправленная копия · проверена повторно" : data?.report ? "Исходный документ · проверен" : "Отчёт пока недоступен";
   $("fix").hidden = !data?.report || corrected;
-  $("fix").disabled = Boolean(busy || entry.refreshing || !session || entry.retryUntil > Date.now());
+  $("fix").disabled = Boolean(busy || entry.refreshing || !session || paused || entry.retryUntil > Date.now());
   $("download").hidden = !data?.download_url;
   $("download").disabled = Boolean(entry.downloading);
   $("refresh").hidden = !data || (!entry.error && !busy && data.state !== "failed");

@@ -1,0 +1,27 @@
+{
+	servers {
+		timeouts {
+			read_header 10s
+			read_body {$PROXY_UPLOAD_TIMEOUT:130s}
+			idle 60s
+		}
+	}
+	grace_period 210s
+}
+
+{$SITE_ADDRESS} {
+	request_body {
+		max_size {$MAX_REQUEST_BODY_BYTES:22020096}
+	}
+	reverse_proxy app:8000 {
+		# No request buffering or POST retries. Caddy replaces untrusted X-Forwarded-*.
+		transport http {
+			dial_timeout 5s
+			response_header_timeout {$PROXY_RESPONSE_TIMEOUT:200s}
+		}
+	}
+}
+
+:80 {
+	respond "Unknown host" 421
+}

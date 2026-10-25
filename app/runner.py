@@ -11,8 +11,9 @@ LOG = logging.getLogger(__name__)
 
 
 class ProcessingError(Exception):
-    def __init__(self, code, message, status_code=500):
+    def __init__(self, code, message, status_code=500, *, retry_after=None):
         self.code, self.message, self.status_code = code, message, status_code
+        self.retry_after = retry_after
         super().__init__(message)
 
 

@@ -1,5 +1,6 @@
 """Configuration for the API and its isolated document workers."""
 from dataclasses import dataclass, field
+import math
 import os
 from pathlib import Path
 
@@ -17,12 +18,18 @@ class Settings:
     max_concurrent_jobs: int = field(default_factory=lambda: int(os.getenv("MAX_CONCURRENT_JOBS", "2")))
     processing_timeout: float = field(default_factory=lambda: float(os.getenv("PROCESSING_TIMEOUT_SECONDS", "60")))
     worker_memory_mb: int = field(default_factory=lambda: int(os.getenv("WORKER_MEMORY_MB", "768")))
+    upload_timeout: float = field(default_factory=lambda: float(os.getenv("UPLOAD_TIMEOUT_SECONDS", "120")))
+    upload_idle_timeout: float = field(default_factory=lambda: float(os.getenv("UPLOAD_IDLE_TIMEOUT_SECONDS", "30")))
+    rate_limit_per_minute: float = field(default_factory=lambda: float(os.getenv("RATE_LIMIT_PER_MINUTE", "12")))
+    rate_limit_burst: int = field(default_factory=lambda: int(os.getenv("RATE_LIMIT_BURST", "4")))
+    rate_limit_max_clients: int = field(default_factory=lambda: int(os.getenv("RATE_LIMIT_MAX_CLIENTS", "4096")))
     ruleset_version: str = "stp-01-2017-2026-10-22"
 
     def __post_init__(self):
-        for name in ("max_upload_bytes", "max_storage_bytes", "max_concurrent_jobs", "processing_timeout", "worker_memory_mb"):
-            if getattr(self, name) <= 0:
-                raise ValueError(f"{name} must be positive")
+        for name in ("max_upload_bytes", "max_storage_bytes", "max_concurrent_jobs", "processing_timeout", "worker_memory_mb",
+                     "upload_timeout", "upload_idle_timeout", "rate_limit_per_minute", "rate_limit_burst", "rate_limit_max_clients"):
+            if not math.isfinite(getattr(self, name)) or getattr(self, name) <= 0:
+                raise ValueError(f"{name} must be finite and positive")
         if self.secret and len(self.secret) < 32:
             raise ValueError("APP_SECRET must contain at least 32 characters")
         if self.cookie_secure and not self.secret:

@@ -1,0 +1,21 @@
+# Allowlist: documents, secrets, Git, local environments and caches never enter the context.
+**
+!Dockerfile
+!requirements.lock
+!requirements-dev.txt
+!app/
+!app/**
+!formal_check/
+!formal_check/**
+!formal_fix/
+!formal_fix/**
+!frontend/
+!frontend/**
+!tests/
+!tests/**
+**/__pycache__/
+**/*.py[cod]
+**/.pytest_cache/
+**/.env*
+**/.git/
+**/storage/

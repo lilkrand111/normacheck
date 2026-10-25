@@ -41,6 +41,7 @@ async def session(request: Request):
 })
 async def upload(request: Request):
     owner = request.app.state.sessions.authorize_mutation(request)
+    request.app.state.rate_limiter.check(request.client.host if request.client else "unknown")
     service = request.app.state.service
     async with service.slot():
         # Admission happens before multipart parsing, including its disk spooling.
@@ -61,6 +62,7 @@ async def document(document_id: str, request: Request):
 @router.post("/api/documents/{document_id}/fix")
 async def fix(document_id: str, request: Request):
     owner = request.app.state.sessions.authorize_mutation(request)
+    request.app.state.rate_limiter.check(request.client.host if request.client else "unknown")
     return await request.app.state.service.fix(document_id, owner)
 
 
