@@ -3,66 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="NormaCheck — проверка оформления курсовой по СТП 01–2017. Загрузите DOCX, разберите замечания и скачайте исправленную копию.">
-  <meta name="theme-color" content="#f8f9f6">
-  <title>NormaCheck — проверка оформления</title>
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/styles.css">
-  <script type="module" src="/assets/app.js"></script>
+  <meta name="description" content="NormaCheck — проверка оформления курсовых и технической документации по СТП 01–2017. От DOCX — к понятным замечаниям и исправленной копии.">
+  <meta name="theme-color" content="#087fcc">
+  <title>NormaCheck — оформление без лишнего шума</title>
+  <link rel="icon" href="/assets/favicon.svg?v=20261028.2" type="image/svg+xml">
+  <link rel="preload" href="/assets/fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/styles.css?v=20261028.2">
+  <link rel="stylesheet" href="/assets/landing.css?v=20261028.2">
+  <link rel="stylesheet" href="/assets/workspace.css?v=20261028.4">
+  <script type="module" src="/assets/app.js?v=20261028.2"></script>
 </head>
 <body>
-  <header class="header shell">
-    <a class="brand" href="/" aria-label="NormaCheck — главная"><img class="brand-mark" src="/assets/favicon.svg" alt="" width="36" height="36"><span class="brand-name">Norma<span class="brand-accent">Check</span></span></a>
-    <span class="header-note">Проверка оформления <span class="standard">СТП 01–2017 БГУИР</span></span>
-  </header>
-  <main class="shell">
-    <section class="intro" aria-labelledby="page-title">
-      <div class="eyebrow"><span class="tiny-dot"></span> Меньше рутины. Больше смысла.</div>
-      <h1 id="page-title">Курсовая в порядке<span>.</span></h1>
-      <p>Проверьте оформление, исправьте доступные ошибки<br class="desktop-break"> и уделите время тому, что действительно важно.</p>
-    </section>
-
-    <div id="global-message" class="notice error-notice" role="alert" hidden></div>
-    <button id="session-retry" class="button secondary" type="button" hidden>Повторить подключение</button>
-
-    <section id="upload-zone" class="upload-zone" aria-label="Загрузить документ">
-      <div class="upload-symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 6h14l8 8v28H14z"/><path d="M28 6v10h8M24 33V22m-5 5 5-5 5 5"/></svg></div>
-      <div class="upload-copy"><h2 id="upload-title">Начнём с вашего документа</h2><p id="upload-subtitle">Перетащите файл сюда или выберите его на устройстве</p></div>
-      <label class="button primary file-button" id="file-label"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 13V3m-4 4 4-4 4 4M3 12v5h14v-5"/></svg><span id="upload-label">Выбрать документ</span><input id="file-input" type="file" accept=".docx" aria-label="Выбрать документ DOCX" disabled></label>
-      <span id="upload-limit" class="upload-limit">DOCX · Подключаемся…</span>
-    </section>
-    <p class="storage-note">Исходный файл остаётся неизменным. Документы сохраняются на сервере для аналитики.</p>
-
-    <section id="workspace" class="workspace" aria-label="Результат проверки" hidden>
-      <div id="document-switcher" class="document-switcher" hidden><label for="document-select">Документы этой вкладки</label><select id="document-select"></select></div>
-      <div class="document-bar">
-        <span class="file-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 2h8l5 5v15H6zM14 2v6h5M9 12h7M9 16h7"/></svg></span>
-        <div class="document-info"><h2 id="filename"></h2><p id="document-state"></p></div>
-        <div class="document-actions"><button id="refresh" class="button secondary" type="button" hidden>Обновить статус</button><button id="fix" class="button primary" type="button" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 16 9-9 3 3-9 9zM5 2v6M2 5h6m8-4v4m-2-2h4"/></svg><span>Автоисправление</span></button><button id="download" class="button primary" type="button" hidden><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v11m-4-4 4 4 4-4M3 13v4h14v-4"/></svg><span>Скачать документ</span></button></div>
-      </div>
-      <div id="document-message" class="notice" role="status" hidden></div>
-      <p id="action-note" class="action-note"></p>
-      <div id="report" hidden>
-        <div class="report-heading"><div><span class="eyebrow">Результат проверки</span><h2>Разберём замечания</h2></div><span id="marked-count" class="marked-count"></span></div>
-        <div class="status-filters" role="group" aria-label="Фильтр по статусу">
-          <button type="button" class="status-filter active" data-status="all" aria-pressed="true">Все замечания <span id="count-all">0</span></button>
-          <button type="button" class="status-filter" data-status="error" aria-pressed="false"><i class="status-dot error"></i>Ошибки <span id="count-error">0</span></button>
-          <button type="button" class="status-filter" data-status="review" aria-pressed="false"><i class="status-dot review"></i>Ручная проверка <span id="count-review">0</span></button>
-          <button type="button" class="status-filter" data-status="recommendation" aria-pressed="false"><i class="status-dot recommendation"></i>Рекомендации <span id="count-recommendation">0</span></button>
+  <a class="skip-link" href="#main">К основному содержимому</a>
+  <main id="main">
+    <div id="landing">
+      <section class="hero sky" id="hero" aria-labelledby="hero-title">
+        <header class="site-header">
+          <a class="brand" href="/" data-home><img src="/assets/favicon.svg?v=20261028.2" alt="" width="32" height="32">NormaCheck</a>
+          <nav class="landing-nav" aria-label="Разделы сайта"><a href="#features">Что проверяем</a><a href="#how-it-works">Как это работает</a><a href="#questions">Вопросы</a></nav>
+          <a class="button lime header-cta" href="#check" data-check>Загрузить DOCX <span aria-hidden="true">↗</span></a>
+        </header>
+        <div class="hero-copy">
+          <p class="eyebrow">Документ в фокусе. Остальное — легче.</p>
+          <h1 id="hero-title">Оформление —<br>без лишнего шума.</h1>
+          <p class="hero-description">Проверка оформления курсовых и технической документации по СТП. От DOCX — к понятным замечаниям и исправленной копии.</p>
+          <div class="hero-actions"><a class="button lime" href="#check" data-check>Выбрать DOCX <span aria-hidden="true">↗</span></a><a class="button glass" href="#example">Посмотреть пример</a></div>
+          <p class="hero-caption">Или перетащите DOCX сюда · СТП 01–2017 · Исходный файл не меняется</p>
         </div>
-        <div class="toolbar">
-          <div class="search-wrap"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="m13 13 4 4"/></svg><input id="search" type="search" placeholder="Найти замечание или фрагмент…" aria-label="Поиск среди замечаний" autocomplete="off"></div>
-          <select id="category" aria-label="Категория замечаний"><option value="all">Все категории</option></select>
-          <label class="hide-done"><input type="checkbox" id="hide-done"> Скрыть отмеченные</label>
+        <div class="floating-cards" aria-hidden="true">
+          <div class="float-card type-card"><small>Формат</small><b>Aa</b><i></i><i></i><i></i></div>
+          <div class="float-card scope-card"><h3>В фокусе проверки</h3><span>Поля документа</span><span>Шрифт и абзацы</span><span>Заголовки</span><span>Подписи и ссылки</span></div>
+          <div class="float-card sample-card"><small>Пример · F03 / Ошибка</small><h3>Межстрочный<br>интервал</h3><div class="sample-values"><div><small>Обнаружено</small><b>1,5</b></div><div><small>Требуется</small><b>1,0</b></div></div><p>СТП · п. 2.1.1, прил. Л; уточнение заказчика</p></div>
+          <div class="float-card clarity-card"><span class="sparkle">✧</span><h3>Меньше<br>рутины.<br>Больше<br>ясности.</h3><p>Поддерживаемые правки —<br>одним действием.</p></div>
+          <div class="float-card spacing-card"><small>По нормам СТП*</small><b>1,0</b><p>*С уточнением заказчика</p></div>
+          <div class="float-card doc-card"><svg viewBox="0 0 48 56" width="48" height="56" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2h22l10 10v40H8zM30 2v12h10M15 25h18M15 33h18M15 41h12"/></svg><b>DOCX</b><p>Проверенная<br>копия</p></div>
         </div>
-        <div class="list-caption"><span id="visible-count" role="status"></span><span>Галочка — ваша отметка, без перепроверки</span></div>
-        <div id="findings" class="findings"></div>
-        <div id="empty" class="empty-state" hidden><span class="empty-symbol" aria-hidden="true">✓</span><h3 id="empty-title"></h3><p id="empty-text"></p><button id="reset-filters" class="button secondary" type="button" hidden>Сбросить фильтры</button></div>
-      </div>
-      <details id="coverage" class="coverage" hidden><summary>Что учитывает проверка <span id="warning-count"></span></summary><div class="coverage-body"><p>Проверяем доступные по структуре DOCX требования СТП 01–2017 с уточнениями заказчика. Смысл текста, изображения и фактическая вёрстка страниц не анализируются.</p><div id="warnings"></div><div id="limitations"></div></div></details>
+        <p class="hero-bottom">Проверяем форму. Содержание остаётся за вами.</p>
+      </section>
+      <div class="benefit-strip content-width"><span><b aria-hidden="true">▤</b> Формат DOCX</span><span><b aria-hidden="true">⌗</b> Оформление по СТП</span><span><b aria-hidden="true">☷</b> Понятные замечания</span><span><b aria-hidden="true">▣</b> Оригинал без изменений</span></div>
+      <section class="about section-space content-width" aria-labelledby="about-title">
+        <div class="section-heading"><p class="eyebrow">• О сервисе</p><h2 id="about-title">Вы пишете о важном.<br>Мы помогаем с оформлением.</h2></div>
+        <div class="about-grid">
+          <article class="about-blue"><h3>Для курсовых и<br>технической документации</h3><div class="paper-demo" aria-hidden="true"><b>1 Основная часть</b><i></i><i></i><i class="highlight"></i><i class="highlight"></i><i></i></div></article>
+          <article class="about-example"><h3>Не просто «не так».<br>А что именно и почему.</h3><p>В каждом замечании — требование, место в документе и основание СТП с уточнением.</p><div class="mini-comparison"><small>Обнаружено → Требуется</small><b>1,5 → Одинарный 1,0</b><p>Пример замечания по интервалу</p></div></article>
+          <div class="about-stack"><article class="about-lime"><span aria-hidden="true">✧</span><h3>Рутину — автоматике</h3><p>Общее автоисправление поддерживаемых нарушений. Остальное — под вашим контролем в Word.</p></article><article class="about-dark"><h3>▣ Исходник остаётся вашим</h3><p>Все автоматические правки — только в копии.</p></article></div>
+        </div>
+      </section>
+      <section id="features" class="features rounded-section section-space" aria-labelledby="features-title"><div class="content-width features-grid">
+        <div><p class="eyebrow">• Что проверяем</p><h2 id="features-title">От полей <br>до последнего <br>абзаца.</h2><p class="muted">NormaCheck сверяет оформление с поддерживаемыми правилами СТП и показывает, где стоит остановиться внимательнее.</p><div class="small-note"><strong>◎ Форма, не содержание</strong><p>Сервис не оценивает смысл, уникальность или качество вашей работы.</p></div></div>
+        <div class="feature-list"><article><span class="feature-icon">⌗</span><div><h3>Поля документа</h3><p>Параметры страницы и отступы от краёв.</p></div></article><article><span class="feature-icon lime">T</span><div><h3>Шрифт и абзацы</h3><p>Шрифт основного текста, межстрочный интервал, абзацный отступ.</p></div></article><article><span class="feature-icon">H₁</span><div><h3>Заголовки</h3><p>Оформление заголовков и структурных элементов.</p></div></article><article><span class="feature-icon">▧</span><div><h3>Подписи и ссылки</h3><p>Места, которые требуют внимания и ручной проверки.</p></div></article></div>
+      </div></section>
+      <section id="example" class="example-section section-space content-width" aria-labelledby="example-title"><div class="section-heading"><p class="eyebrow">• От замечания к понятной правке</p><h2 id="example-title">У каждой правки есть основание.</h2></div>
+        <div class="example-grid"><div class="example-frame"><article class="example-finding"><p class="eyebrow error-text">Пример замечания · Ошибка / F03</p><h3>Межстрочный интервал</h3><div class="comparison"><div><small>Обнаружено</small><p>1,5</p></div><div><small>Требуется</small><p>Одинарный 1,0</p></div></div><h4>Места в документе · 2</h4><p>1 Основная часть</p><p class="muted">«Система выполняет проверку документации…»</p><p class="blue-text">Фрагмент для поиска в Word</p><p class="reference">Основание: пункт 2.1.1, приложение Л; уточнение заказчика.</p></article></div><div class="example-explanation"><h3>Не нужно угадывать,<br>что имелось в виду.</h3><p>Сравните найденное значение с требованием. Откройте указанное место и внесите правку в Word.</p><h4>Одно замечание — несколько мест</h4><p>У замечания может быть несколько мест: раздел, фрагмент или параметр. Если фрагмент есть, скопируйте его для поиска в Word.</p><p>Текстовый фрагмент доступен не всегда. Предпросмотра и точных номеров страниц на сайте нет.</p></div></div>
+      </section>
+      <section id="how-it-works" class="process rounded-section section-space"><div class="content-width"><div class="section-heading"><p class="eyebrow">• Как это работает</p><h2>Из DOCX — в проверенную копию.</h2></div><div class="steps"><article><span>↥</span><h3>01 / Загрузите DOCX</h3><p>Выберите документ для проверки оформления по профилю СТП.</p></article><article><span>☷</span><h3>02 / Изучите замечания</h3><p>Посмотрите ошибки, ручные проверки и рекомендации.</p></article><article><span>✧</span><h3>03 / Примените правки</h3><p>Запустите автоисправление поддерживаемой части. Остальное — в Word.</p></article><article><span class="lime">↓</span><h3>04 / Получите копию</h3><p>После повторной проверки скачайте исправленную копию.</p></article></div><p class="process-note">Исходный файл не меняется. Оставшиеся замечания не мешают скачиванию после повторной проверки.</p></div></section>
+      <section class="tools-section section-space content-width"><div class="section-heading"><h2>Два инструмента. Разные задачи.</h2><p>Автоисправление меняет копию документа. Личная отметка помогает не потерять свой прогресс.</p></div><div class="tools-grid"><article class="tool-auto"><h3>Меньше ручной рутины</h3><p>Одна кнопка для всего документа. Только поддерживаемые нарушения исправляются автоматически — в отдельной копии.</p><a href="#check" data-check class="button lime">Проверить свой документ <span aria-hidden="true">↗</span></a><small>Далее — автоисправление, повторная проверка и скачивание.</small><p class="tool-footnote">Неподдерживаемые правки вы вносите в Word. Полное соответствие СТП не гарантируется.</p></article><article class="tool-manual"><h3>Свой прогресс — отдельно</h3><p>Обратимая галочка «Исправлено» — только ваша отметка. Она не меняет DOCX и не уменьшает число замечаний.</p><div class="marks-demo"><strong>✓ Исправлено</strong><div><span>Пример: 2 из 8 отмечено вами</span><span>Скрыть отмеченные</span></div></div><p class="tool-footnote">Отмеченные можно снова показать, а отметку — снять. После новой загрузки или автоисправления отметки в новый отчёт не переносятся.</p></article></div></section>
+      <section id="questions" class="faq-section section-space content-width"><div><p class="eyebrow">• Важно знать</p><h2>Ясность —<br>и в возможностях,<br>и в границах.</h2><aside id="boundaries" class="boundary-note"><span aria-hidden="true">⌘</span><h3>Границы проверки</h3><p>Проверяем оформление по СТП, а не смысл и уникальность. Не все требования можно проверить или исправить автоматически.</p><p>Ограничения доступны отдельно и не смешиваются с ошибками в отчёте.</p></aside></div><div class="faq-list"><details open><summary>Что означают статусы замечаний?</summary><p>Ошибка — найдено несоответствие. Ручная проверка — место нужно оценить самостоятельно. Рекомендация — полезное улучшение оформления.</p></details><details open><summary>Как найти нужное замечание в отчёте?</summary><p>Поиск работает вместе с фильтрами категории и статуса. Настройки можно сбросить. Личные отметки учитываются отдельно от результатов.</p></details><details open><summary>Когда можно скачать исправленную копию?</summary><p>После автоисправления и повторной проверки копии. Оставшиеся замечания не блокируют скачивание — их можно исправить в Word.</p></details><details open><summary>Если замечаний нет — документ соответствует СТП?</summary><p>Это означает только: «В пределах выполненных проверок замечаний не найдено». Результат не заменяет ручную проверку требований.</p></details><details open><summary>Можно ли править документ прямо на сайте?</summary><p>NormaCheck не редактор DOCX. Поддерживаемые правки применяются автоматически к копии, остальные вы вносите в Word.</p></details><details><summary>Где хранятся мои документы?</summary><p>Все принятые документы и опубликованные результаты сохраняются на сервере постоянно для последующей аналитики. Доступ защищён сессией вашего браузера. Потеря cookie лишает доступа, но не удаляет файлы. Документы внешним сервисам не передаются.</p></details></div></section>
+      <section class="final-cta sky rounded-section"><p class="eyebrow">Документ готов. Осталось проверить форму.</p><h2>Пусть оформление<br>станет легче.</h2><a class="button lime" href="#check" data-check>Загрузить DOCX <span aria-hidden="true">↗</span></a><p>Проверка по СТП · Понятные замечания · Исходный файл не меняется</p></section>
+      <footer class="site-footer content-width"><div><a class="brand" href="/" data-home><img src="/assets/favicon.svg?v=20261028.2" alt="" width="28" height="28">NormaCheck</a><p>Проверка оформления курсовых<br>и технической документации по СТП.</p></div><nav aria-label="Информация о сервисе"><a href="#features">Что проверяем</a><a href="#how-it-works">Как это работает</a></nav><nav aria-label="Помощь"><a href="#boundaries">Возможности и ограничения</a><a href="#questions">Вопросы и ответы</a></nav><div class="footer-bottom"><span>NormaCheck / Cloud Desk</span><span>Проверяем оформление. Содержание остаётся за вами.</span></div></footer>
+    </div>
+    <section id="application" class="application" aria-label="Проверка документа" hidden>
+      <header class="app-header"><a class="brand" href="/" data-home><img src="/assets/favicon.svg?v=20261028.2" alt="" width="30" height="30">NormaCheck</a><p id="app-context">Проверка оформления</p><span id="standard-badge" class="standard-badge">СТП 01–2017</span><a id="new-document" class="button glass" href="#check" data-check hidden>↑ Загрузить другой DOCX</a></header>
+      <div class="app-meta"><a id="back-home" href="/" data-home>← К лендингу</a><div id="document-switcher" class="document-switcher" hidden><label for="document-select">Документы этой вкладки</label><select id="document-select"><option value="">Выберите документ</option></select></div></div>
+      <div id="global-message" class="notice" role="alert" hidden></div><button id="session-retry" class="button secondary" type="button" hidden>Повторить подключение</button><div id="busy-message" class="notice" role="status" hidden></div><div id="pause-message" class="notice" role="status" hidden></div>
+      <section id="upload-screen" class="upload-screen" aria-labelledby="upload-title"><p class="eyebrow">Документ в фокусе. Остальное — легче.</p><h1 id="upload-title" tabindex="-1">Оформление —<br>без лишнего шума.</h1><p class="upload-intro">Проверка оформления курсовых и технической документации по СТП. Загрузите DOCX — и переходите к замечаниям.</p>
+        <div class="upload-card"><div id="upload-zone" class="upload-zone"><span class="upload-symbol" aria-hidden="true">↥</span><p id="selected-filename" class="selected-filename" hidden></p><label class="button secondary file-button"><span id="upload-label">Выбрать DOCX</span><input id="file-input" type="file" accept=".docx" aria-label="Выбрать документ DOCX"></label><p id="upload-subtitle">или перетащите документ сюда</p><p id="upload-limit">DOCX · Подключаемся…</p></div><div class="standard-row"><span>Редакция стандарта</span><strong>СТП 01–2017</strong></div><button id="start-check" class="button lime" type="button" disabled>Проверить документ ↗</button></div>
+        <a class="boundaries-link" href="#boundaries">Возможности и ограничения ↗</a><p class="storage-note">Исходный файл не меняется. Принятые документы и результаты сохраняются на сервере постоянно для последующей аналитики. Доступ защищён сессией этого браузера.</p>
+      </section>
+      <section id="workspace" hidden aria-labelledby="document-title"><div class="report-heading"><h1 id="document-title" tabindex="-1">Проверяем документ</h1><p id="document-state" role="status"></p><div id="report-counts" class="report-counts" hidden><span><b id="count-all">0</b> замечаний</span><span><b id="count-error">0</b> ошибок</span><span><b id="count-review">0</b> ручных проверок</span><span><b id="count-recommendation">0</b> рекомендаций</span></div></div>
+        <div id="document-message" class="notice error-notice" role="alert" hidden></div><div id="recovery-actions" class="recovery-actions"><button id="refresh" class="button glass" type="button" hidden>Обновить статус</button><button id="retry-upload" class="button lime" type="button" hidden>Повторить загрузку вручную</button><a id="choose-again" class="button glass" href="#check" data-check hidden>Выбрать другой DOCX</a></div>
+        <div id="waiting" class="waiting-panel" hidden><span id="waiting-spinner" class="spinner" aria-hidden="true"></span><h2 id="waiting-title">Проверяем оформление</h2><p id="waiting-filename"></p><p id="waiting-note">Результат появится после завершения проверки. Исходный файл не меняется.</p><a href="#check" data-check class="text-link">Проверить другой документ ↗</a></div>
+        <div id="report" class="report-panel" hidden>
+          <div class="toolbar"><div class="search-wrap"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Поиск по замечаниям" aria-label="Поиск по замечаниям" autocomplete="off"><button id="clear-search" type="button" aria-label="Очистить поиск" hidden>×</button></div><select id="category" aria-label="Категория замечаний"><option value="all">Категория: все категории</option></select><select id="status" aria-label="Статус замечаний"><option value="all">Статус: все статусы</option><option value="error">Ошибка</option><option value="review">Ручная проверка</option><option value="recommendation">Рекомендация</option></select><button id="reset-filters" class="text-button" type="button">Сбросить</button><span id="visible-count" role="status"></span></div>
+          <div class="manual-progress"><strong id="marked-count"></strong><label><input id="hide-done" type="checkbox"> Скрыть отмеченные</label><p>Личные отметки не меняют документ и результат проверки.</p></div><p id="storage-warning" class="notice" role="status" hidden>Браузер не разрешил сохранить отметки: после обновления страницы они сбросятся.</p>
+          <div class="report-grid"><section id="findings-column" class="findings-column" aria-label="Список замечаний"><h2 id="list-heading">Замечания</h2><div id="findings" class="findings"></div></section><div id="details-slot" class="details-slot"><article id="finding-detail" class="finding-detail" aria-label="Подробности замечания"></article></div><section id="empty" class="empty-state" hidden><span class="eyebrow" id="empty-kicker"></span><h2 id="empty-title"></h2><p id="empty-text"></p><button id="empty-action" class="button lime" type="button" hidden></button></section>
+            <aside class="document-actions" aria-labelledby="actions-title"><div><span id="fix-spinner" class="spinner small" aria-hidden="true" hidden></span><h2 id="actions-title">Исправить оформление</h2><p id="actions-description">Поддерживаемые правки применятся ко всему документу, не к карточке.</p></div><button id="fix" class="button lime" type="button">Автоисправить документ</button><p id="action-note"></p><div class="download-section"><button id="download" class="button secondary" type="button" disabled>Скачать исправленную копию</button><p id="download-note">Доступно после повторной проверки. Оставшиеся замечания не мешают скачиванию.</p><p id="download-status" role="status"></p></div><p class="marks-note">Отметки относятся к конкретному отчёту и не переносятся в новый результат.</p><button id="show-coverage" class="text-button" type="button">Предупреждения и ограничения ↗</button></aside>
+          </div>
+          <details id="coverage" class="coverage"><summary>Предупреждения и ограничения проверки <span id="warning-count"></span></summary><div class="coverage-body"><p>Проверяем доступные по структуре DOCX требования СТП 01–2017 с уточнениями заказчика. Смысл текста, изображения и фактическая вёрстка страниц не анализируются.</p><div id="warnings"></div><div id="limitations"></div></div></details>
+        </div>
+      </section>
     </section>
     <noscript><p class="notice error-notice">Для загрузки и проверки документа включите JavaScript в браузере.</p></noscript>
   </main>
-  <footer class="footer shell"><span>Маленький помощник для большой работы.</span><span>Оформление по СТП 01–2017</span></footer>
+  <div id="announcement" class="sr-only" role="status" aria-live="polite"></div>
 </body>
 </html>

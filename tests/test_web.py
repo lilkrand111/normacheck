@@ -5,6 +5,7 @@ from dataclasses import replace
 from datetime import timedelta
 from io import BytesIO
 import json
+import re
 import threading
 from zipfile import ZipFile
 
@@ -341,10 +342,15 @@ def test_frontend_is_served_with_csp_and_api_stays_available(client):
     page = client.get("/")
     assert page.status_code == 200
     assert 'lang="ru"' in page.text
-    assert 'src="/assets/app.js"' in page.text
+    script = re.search(r'<script[^>]+src="(/assets/app\.js(?:\?[^\"]*)?)"', page.text)
+    assert script, "The page must load the local application module"
+    assert client.get(script.group(1)).status_code == 200
     assert "script-src 'self'" in page.headers["content-security-policy"]
     assert page.headers["cache-control"] == "no-cache"
-    for asset in ("app.js", "report.mjs", "styles.css", "favicon.svg"):
+    for asset in ("app.js", "api.mjs", "documents.mjs", "views.mjs", "report.mjs",
+                  "styles.css", "landing.css", "workspace.css", "favicon.svg",
+                  "fonts/InterVariable.woff2", "images/clouds-landing.webp",
+                  "images/clouds-workspace.webp", "images/clouds-footer.webp"):
         assert client.get(f"/assets/{asset}").status_code == 200
     for path in ("/assets/../app/security.py", "/assets/%2e%2e/storage/.session-secret", "/assets/index.html", "/storage/documents"):
         assert client.get(path).status_code == 404
