@@ -78,6 +78,10 @@ p {
   outline:3px solid #075f9a;
   outline-offset:4px
 }
+/* Заголовки получают фокус программно для экранных дикторов; обводка им не нужна. */
+[tabindex="-1"]:focus {
+  outline:none
+}
 .sky :focus-visible,.application>header :focus-visible,.app-meta :focus-visible {
   outline-color:#d0fa69
 }

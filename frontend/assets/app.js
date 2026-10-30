@@ -1,5 +1,5 @@
 import { DocumentStore, isBusy, isFixing, defaultFilters } from './documents.mjs';
-import { $, element, notice, renderReport, renderCoverage } from './views.mjs?v=20261030';
+import { $, element, notice, renderReport, renderCoverage } from './views.mjs?v=20261031';
 
 let storage;
 try { storage = window.localStorage; } catch { storage = null; }
@@ -103,7 +103,7 @@ function render() {
   $('fix-spinner').hidden = !fixing;
   $('fix').disabled = busy || corrected || entry.refreshing || Boolean(store.admissionError());
   $('fix').textContent = fixing ? 'Операция выполняется…' : corrected ? 'Копия уже обработана' : !report.findings.length ? 'Создать проверенную копию' : 'Автоисправить документ';
-  $('action-note').textContent = corrected ? 'Оставшиеся замечания проверьте в Word. После ручных правок загрузите документ заново.' : 'Исходный файл не меняется. После автоисправления — повторная проверка копии, затем скачивание.';
+  $('action-note').textContent = corrected ? 'Оставшиеся замечания проверьте в Word. После ручных правок загрузите документ заново.' : 'Исходный файл не меняется. После автоисправления копия проходит повторную проверку и становится доступна для скачивания.';
   $('download').disabled = !data.download_url || entry.downloading;
   $('download').textContent = entry.downloading ? 'Получаем файл…' : 'Скачать исправленную копию';
   $('download-note').textContent = data.download_url ? 'Копия готова. Оставшиеся замечания не мешают скачиванию.' : 'Доступно после повторной проверки. Оставшиеся замечания не мешают скачиванию.';

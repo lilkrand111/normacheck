@@ -246,15 +246,17 @@
 .tool-auto .tool-footnote img { position:absolute; left:0; top:4px }
 
 /* 08 — Вопросы и границы проверки */
-.faq-section { display:grid; grid-template-columns:448fr 736fr; gap:96px; height:870px; padding-top:67px; border-top:1px solid var(--line) }
+.faq-section { display:grid; grid-template-columns:448fr 736fr; gap:96px; align-content:start; min-height:870px; padding-top:67px; border-top:1px solid var(--line) }
 #landing .faq-section h2 { margin-top:25.6px; font-size:50px; line-height:1.1 }
 .boundary-note { position:relative; height:347px; margin-top:50px; padding:82px 26px 0; border-radius:30px; background:#eaf6fc; color:#0d5a8c }
 .boundary-note img { position:absolute; left:28px; top:30px }
 #landing .boundary-note h3 { font-size:27px; color:#03518a }
 #landing .boundary-note p { max-width:394px; margin-top:17.85px; font-size:17px }
 #landing .boundary-note p:last-child { margin-top:41.05px; padding-top:21px; border-top:1px solid #c8dfec; font-size:14px }
-.faq-list { padding-top:2px }
+.faq-list { align-self:center }
+.faq-list details:last-child { margin-bottom:0 }
 .faq-list details { margin-bottom:19px; padding-bottom:39.5px; border-bottom:1px solid var(--line) }
+.faq-list details:not([open]) { padding-bottom:24px }
 .faq-list summary { position:relative; padding-right:66px; font-size:20px; font-weight:500; line-height:1.45; list-style:none }
 .faq-list summary::-webkit-details-marker { display:none }
 .faq-list summary::after { content:'+'; position:absolute; right:8px; top:0; width:24px; font-size:24px; font-weight:400; color:var(--blue) }

@@ -128,7 +128,7 @@ export function renderReport(entry, { onSelect, onMark, mobile }) {
 export function renderCoverage(data) {
   $('warning-count').textContent = data.warnings.length ? `· ${data.warnings.length}` : '';
   $('show-coverage').textContent = data.warnings.length ? `Предупреждения · ${data.warnings.length} и ограничения ↗` : 'Ограничения проверки ↗';
-  for (const [id, heading, values] of [['warnings', 'Особенности документа', data.warnings], ['limitations', 'Границы выполненных проверок', data.limitations.map(item => `${item.rule_id} — ${item.description}`)]]) {
+  for (const [id, heading, values] of [['warnings', 'Особенности документа', data.warnings], ['limitations', 'Границы выполненных проверок', data.limitations.map(item => `${item.rule_id}: ${item.description}`)]]) {
     const container = $(id); container.replaceChildren();
     if (!values.length) continue;
     const list = element('ul'); list.append(...values.map(value => element('li', '', value)));
