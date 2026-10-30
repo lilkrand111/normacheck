@@ -161,3 +161,8 @@ if (await store.connect()) {
   const entry = current();
   if (mode === 'report' && entry?.data?.document_id) await store.refresh(entry);
 }
+
+$('example-copy').addEventListener('click', async () => {
+  try { await navigator.clipboard.writeText('Система выполняет проверку документации…'); $('announcement').textContent = 'Фрагмент примера скопирован'; }
+  catch { $('announcement').textContent = 'Копирование недоступно. Выделите текст примера вручную.'; }
+});

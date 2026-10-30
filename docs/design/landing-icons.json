@@ -1,0 +1,511 @@
+{
+  "source": "docs/design/Forma.fig",
+  "source_sha256": "267938d54520722025c6921ee6ba12254ee1a513d273907d71243d58f51ba18c",
+  "method": "Original strokeGeometry commands converted to SVG filled outlines; no replacement paths. SVG viewport has 2px padding on each side.",
+  "icons": [
+    {
+      "file": "4063-sparkles.svg",
+      "node": "3384:4063",
+      "vector_node": "3384:4002",
+      "name": "sparkles",
+      "width": 23.34079933166504,
+      "height": 23.33799934387207,
+      "position": {
+        "m00": 1.0,
+        "m01": -6.938893903907228e-18,
+        "m02": 205.0,
+        "m10": 6.938893903907228e-18,
+        "m11": 1.0,
+        "m12": 35.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3763
+      },
+      "commands_sha256": [
+        "770b1aa3a7cbb307f90f85086d75741fbfd9c4dd27167c12b90e431bc2763c52"
+      ],
+      "svg_sha256": "7808151a3a5d91f2a4d54bbc6cac94d4aec839800dd64c49d5cce93eca1da9c7"
+    },
+    {
+      "file": "4064-file-check-2.svg",
+      "node": "3384:4064",
+      "vector_node": "3384:4005",
+      "name": "file-check-2",
+      "width": 26.663999557495117,
+      "height": 33.33599853515625,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 49.66740036010742,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 30.332164764404297
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3773
+      },
+      "commands_sha256": [
+        "ce05d1b77b5e13465d9b45e05555e03d85b0601c976c4e6b52244fc2da67abb4"
+      ],
+      "svg_sha256": "f48ca0ce6947f57334750238afbd3763692d3cffabf4ff9f0c4995e80241b087"
+    },
+    {
+      "file": "4068-file-text.svg",
+      "node": "3384:4068",
+      "vector_node": "3384:4008",
+      "name": "file-text",
+      "width": 15.331799507141113,
+      "height": 19.16819953918457,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 0.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 0.9158935546875
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3782
+      },
+      "commands_sha256": [
+        "de6c9525aaafbe23e2c779418cab924cf713173ce9256e803b95804fe68272c3"
+      ],
+      "svg_sha256": "4257c80d3cb4e19a04dbf95f7ccd0dafa1ffc0f009e552d3dddd3c654210291b"
+    },
+    {
+      "file": "4069-scan-line.svg",
+      "node": "3384:4069",
+      "vector_node": "3384:4011",
+      "name": "scan-line",
+      "width": 17.25,
+      "height": 17.25,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 0.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 1.875
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3785
+      },
+      "commands_sha256": [
+        "0d1b609703de8cad1795d82a70f46211afd0fce3d57d35f29da7c6837a812410"
+      ],
+      "svg_sha256": "6e39fe5f5bb7921ab11ee16df6ff28b9c055a1624367dd18059f8c92b3c91232"
+    },
+    {
+      "file": "4070-list-checks.svg",
+      "node": "3384:4070",
+      "vector_node": "3384:4014",
+      "name": "list-checks",
+      "width": 17.25,
+      "height": 13.418200492858887,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 0.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 3.7908935546875
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3788
+      },
+      "commands_sha256": [
+        "1be0e0bbd17b554e1a2035715ccaa65324bab1986cade693ec589c27aca42927"
+      ],
+      "svg_sha256": "2f64f90470f9fb5e1f224e9b3a58f686940562d58d8d34b0d8e74b444f0da213"
+    },
+    {
+      "file": "4071-copy-check.svg",
+      "node": "3384:4071",
+      "vector_node": "3384:4017",
+      "name": "copy-check",
+      "width": 19.16819953918457,
+      "height": 19.16819953918457,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 0.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 0.9158935546875
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3791
+      },
+      "commands_sha256": [
+        "bc750116b74787f364888d3ab856166a08b4a8ce0a26423f824d719a534e5121"
+      ],
+      "svg_sha256": "51a94fd8cfffbc0ea5fcc6b3700e121e0b14c8562e9510fc1bcc6efccdb40dac"
+    },
+    {
+      "file": "4072-wand-sparkles.svg",
+      "node": "3384:4072",
+      "vector_node": "3384:4020",
+      "name": "wand-sparkles",
+      "width": 26.668800354003906,
+      "height": 26.671998977661133,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 39.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 34.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3820
+      },
+      "commands_sha256": [
+        "e987df3877a40d5577be3c700c920cf5d8150c859f90fedbb94e50af2d21b05d"
+      ],
+      "svg_sha256": "b81512b3d58a0d85bc19df63b1292e31766610e6963df5bb494117325d6e4c53"
+    },
+    {
+      "file": "4073-files.svg",
+      "node": "3384:4073",
+      "vector_node": "3384:4023",
+      "name": "files",
+      "width": 19.5,
+      "height": 21.668399810791016,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 30.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 316.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3820
+      },
+      "commands_sha256": [
+        "b5e4397e13838f3ea68e4403ab697950eb4e5612661f7b1fb5329d77839694c7"
+      ],
+      "svg_sha256": "9adc9ad962c726735d424277ed2f71fea649f320604e98c58375a557ffc22cc3"
+    },
+    {
+      "file": "4074-info.svg",
+      "node": "3384:4074",
+      "vector_node": "3384:4026",
+      "name": "info",
+      "width": 18.334800720214844,
+      "height": 18.334800720214844,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 129.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 549.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3829
+      },
+      "commands_sha256": [
+        "b2c939c3ce22073b818323e25d8320aa86230c577f633889709ef9411eef8050"
+      ],
+      "svg_sha256": "0f061114011207e2b06207d282a11bee7f36e6ed07b0c010de481c4da1e403a4"
+    },
+    {
+      "file": "4075-scan.svg",
+      "node": "3384:4075",
+      "vector_node": "3384:4029",
+      "name": "scan",
+      "width": 18.0,
+      "height": 18.0,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 19.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 19.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3837
+      },
+      "commands_sha256": [
+        "54eed60e0a703b402128c83bf4fb65abd27544e2f1a839250284fe3c1c2f1235"
+      ],
+      "svg_sha256": "97b54d9b522a75f24b481f09fb6ea4f5adbb734987f6eab9e700b0fda2abeb89"
+    },
+    {
+      "file": "4076-type.svg",
+      "node": "3384:4076",
+      "vector_node": "3384:4032",
+      "name": "type",
+      "width": 15.99839973449707,
+      "height": 15.99839973449707,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 20.0009765625,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 20.000732421875
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3843
+      },
+      "commands_sha256": [
+        "ece811e63aacf3317a141628a2ccde06e70b62e7639092ad96d9980071f7e13c"
+      ],
+      "svg_sha256": "4cf916a0d0f74b0309e735be4161131bba98602903e53a321cba86d92660315d"
+    },
+    {
+      "file": "4077-heading-1.svg",
+      "node": "3384:4077",
+      "vector_node": "3384:4035",
+      "name": "heading-1",
+      "width": 15.99839973449707,
+      "height": 12.0,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 20.0009765625,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 22.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3849
+      },
+      "commands_sha256": [
+        "eadd2ea92a5376bb844c5ff9aba78b0dd26819f0486101b47bcba1c40d45976e"
+      ],
+      "svg_sha256": "60223d61c4947fb81c871f24f6689be32cd308509c35c97dce56a3f54a35201f"
+    },
+    {
+      "file": "4078-image.svg",
+      "node": "3384:4078",
+      "vector_node": "3384:4038",
+      "name": "image",
+      "width": 18.0,
+      "height": 18.0,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 19.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 19.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3855
+      },
+      "commands_sha256": [
+        "505295ccbeef69c3f68397a405566206ccdb0a5821a978fe0e6ffe03b974a1da"
+      ],
+      "svg_sha256": "fe4ed6e1e33ccaf63cb9c66b5a9f06e3ca39e3aef8d01a8cec0017315dc1d4fd"
+    },
+    {
+      "file": "4079-copy.svg",
+      "node": "3384:4079",
+      "vector_node": "3384:4041",
+      "name": "copy",
+      "width": 13.334400177001953,
+      "height": 13.334400177001953,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 29.3330078125,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 365.332763671875
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3865
+      },
+      "commands_sha256": [
+        "79d229bdf0f4de2e2e1d35fccca80831d5e29d5053b5c97c2102d40f4292ce97"
+      ],
+      "svg_sha256": "fc1ccf9a52bf534e65d24d8037eba02970dee8d90f9a11a803ac52ae8f699f58"
+    },
+    {
+      "file": "4080-upload.svg",
+      "node": "3384:4080",
+      "vector_node": "3384:4044",
+      "name": "upload",
+      "width": 18.0,
+      "height": 18.0,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 117.0,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 22.0
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3894
+      },
+      "commands_sha256": [
+        "93dc697471be444685fb63f6fe946428796b5b13a166f37019d4d50806f50a55"
+      ],
+      "svg_sha256": "9d1f539ca4b50a05da22934d1789a3cdc96a2dae891624f04ded4eb62b0b0d7f"
+    },
+    {
+      "file": "4081-list-filter.svg",
+      "node": "3384:4081",
+      "vector_node": "3384:4047",
+      "name": "list-filter",
+      "width": 20.00160026550293,
+      "height": 14.00160026550293,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 115.9990234375,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 23.999267578125
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3899
+      },
+      "commands_sha256": [
+        "f7c06d2fc98396b992533e29f8cc8cadb7430afe62b14be4bb2c2cf4f6f5a702"
+      ],
+      "svg_sha256": "a3c07a385466b5849a4ab15ac5fb6429a67706fe15d99c4a573e775adb5f6e76"
+    },
+    {
+      "file": "4082-wand-sparkles.svg",
+      "node": "3384:4082",
+      "vector_node": "3384:4050",
+      "name": "wand-sparkles",
+      "width": 20.00160026550293,
+      "height": 20.003999710083008,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 116.001953125,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 20.999267578125
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3904
+      },
+      "commands_sha256": [
+        "af3ec085f5d07529c8075d8980335568e916964d5f8561d50ef1c5753b36e500"
+      ],
+      "svg_sha256": "ab10b361ae85ed6472203dbb85462101b850c7bce63cdfbc3666f9b7f66ae98b"
+    },
+    {
+      "file": "4083-file-check-2.svg",
+      "node": "3384:4083",
+      "vector_node": "3384:4053",
+      "name": "file-check-2",
+      "width": 15.99839973449707,
+      "height": 20.00160026550293,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 118.0009765625,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 20.999267578125
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3909
+      },
+      "commands_sha256": [
+        "7b26e37927dbc8f83a57db67695418fbdceebbc50574ebbd11b7efc7da4613f5"
+      ],
+      "svg_sha256": "329e6451dd16714ce686904f3112a9667b2291d335b03e73dd33fe114a7d0b48"
+    },
+    {
+      "file": "4084-info.svg",
+      "node": "3384:4084",
+      "vector_node": "3384:4056",
+      "name": "info",
+      "width": 16.667999267578125,
+      "height": 16.667999267578125,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 31.666015625,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 356.666015625
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3919
+      },
+      "commands_sha256": [
+        "e9aa95766cbcfba2349536c445dc8f89acb8f16b3b020c63dc7197921523c4e1"
+      ],
+      "svg_sha256": "28c0ce9745e309af28ad72344867b190b7b31de9f9d17fc6e733f33e2328b3ff"
+    },
+    {
+      "file": "4085-check.svg",
+      "node": "3384:4085",
+      "vector_node": "3384:4059",
+      "name": "check",
+      "width": 11.332200050354004,
+      "height": 7.791100025177002,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 56.833984375,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 224.25
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3930
+      },
+      "commands_sha256": [
+        "041948c6eaf88c6d8ebdcc257092083b13689081b3fb331b7b6714b4022ca690"
+      ],
+      "svg_sha256": "9bd4b09d210b494f1fb644b1b9434c0272e967cb22a04055f9e8bc243b40770d"
+    },
+    {
+      "file": "4086-scan-eye.svg",
+      "node": "3384:4086",
+      "vector_node": "3384:4062",
+      "name": "scan-eye",
+      "width": 22.5,
+      "height": 22.5,
+      "position": {
+        "m00": 1.0,
+        "m01": 0.0,
+        "m02": 29.75,
+        "m10": 0.0,
+        "m11": 1.0,
+        "m12": 31.75
+      },
+      "parent": {
+        "sessionID": 3384,
+        "localID": 3945
+      },
+      "commands_sha256": [
+        "447197293d84ad0e0f4edb03e3a41670570e82ee7fce76b81e57c99f401731ec"
+      ],
+      "svg_sha256": "c02eb6f8410a64780b6c8f9c7a8ce7e5a388e684f332b5743453723d346c4727"
+    }
+  ]
+}
