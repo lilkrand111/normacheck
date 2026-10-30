@@ -1,5 +1,5 @@
 import { DocumentStore, isBusy, isFixing, defaultFilters } from './documents.mjs';
-import { $, element, notice, renderReport, renderCoverage } from './views.mjs?v=20261028';
+import { $, element, notice, renderReport, renderCoverage } from './views.mjs?v=20261030';
 
 let storage;
 try { storage = window.localStorage; } catch { storage = null; }

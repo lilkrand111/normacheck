@@ -86,7 +86,7 @@ export function renderReport(entry, { onSelect, onMark, mobile }) {
   if (!visible.length) {
     $('empty-kicker').textContent = !findings.length ? 'Проверка завершена' : hiddenByMarks ? 'Подходящие замечания скрыты' : `0 видимых · ${findings.length} найдено в документе`;
     $('empty-title').textContent = !findings.length ? 'В пределах выполненных проверок замечаний не найдено' : hiddenByMarks ? 'Все подходящие замечания отмечены и скрыты' : 'Ничего не найдено по условиям';
-    $('empty-text').textContent = !findings.length ? 'Это результат выполненной проверки, а не гарантия полного соответствия СТП. Часть требований нужно проверить вручную.' : hiddenByMarks ? 'Снимите скрытие, чтобы снова увидеть отмеченные пункты. Ваши отметки и исходные результаты сохранятся.' : 'Поиск, категория и статус применены вместе. Измените условия или сбросьте их.';
+    $('empty-text').textContent = !findings.length ? 'По всем выполненным проверкам оформление в порядке. Перед сдачей рекомендуем ещё раз просмотреть документ целиком.' : hiddenByMarks ? 'Снимите скрытие, чтобы снова увидеть отмеченные пункты. Ваши отметки и исходные результаты сохранятся.' : 'Поиск, категория и статус применены вместе. Измените условия или сбросьте их.';
     $('empty-action').hidden = !findings.length; $('empty-action').textContent = hiddenByMarks ? 'Показать отмеченные' : 'Сбросить поиск и фильтры';
     $('empty-action').dataset.action = hiddenByMarks ? 'show' : 'reset';
   }
